@@ -502,7 +502,7 @@ class DebertaV2Encoder(nn.Module):
         return_dict=True,
     ):
         if attention_mask.dim() <= 2:
-            input_mask = attention_mask
+            input_mask = attention_mask.byte()
         else:
             input_mask = (attention_mask.sum(-2) > 0).byte()
         attention_mask = self.get_attention_mask(attention_mask)
