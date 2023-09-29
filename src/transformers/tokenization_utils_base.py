@@ -2961,7 +2961,7 @@ class PreTrainedTokenizerBase(SpecialTokensMixin, PushToHubMixin):
         if padding_strategy == PaddingStrategy.LONGEST:
             max_length = max(len(inputs) for inputs in required_input)
             padding_strategy = PaddingStrategy.MAX_LENGTH
-
+        print("max length", max_length, padding_strategy,)
         batch_outputs = {}
         for i in range(batch_size):
             inputs = dict((k, v[i]) for k, v in encoded_inputs.items())
@@ -2977,7 +2977,7 @@ class PreTrainedTokenizerBase(SpecialTokensMixin, PushToHubMixin):
                 if key not in batch_outputs:
                     batch_outputs[key] = []
                 batch_outputs[key].append(value)
-
+            print("outputs", [(k, v.shape) for k, v in outputs.items()])
         return BatchEncoding(batch_outputs, tensor_type=return_tensors)
 
     def create_token_type_ids_from_sequences(
