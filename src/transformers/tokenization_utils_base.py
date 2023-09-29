@@ -2961,7 +2961,7 @@ class PreTrainedTokenizerBase(SpecialTokensMixin, PushToHubMixin):
         if padding_strategy == PaddingStrategy.LONGEST:
             max_length = max(len(inputs) for inputs in required_input)
             padding_strategy = PaddingStrategy.MAX_LENGTH
-        logger.info("max length", max_length, padding_strategy, "batch_size", batch_size, )
+        logger.info(f"max length, {max_length}, {padding_strategy}, batch_size, {batch_size}," )
         
         batch_outputs = {}
         for i in range(batch_size):
@@ -2978,7 +2978,7 @@ class PreTrainedTokenizerBase(SpecialTokensMixin, PushToHubMixin):
                 if key not in batch_outputs:
                     batch_outputs[key] = []
                 batch_outputs[key].append(value)
-            logger.info("outputs", [(k, v) for k, v in outputs.items()])
+            logger.info(f"outputs, {[(k, v) for k, v in outputs.items()]}")
             
         return BatchEncoding(batch_outputs, tensor_type=return_tensors)
 
