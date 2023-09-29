@@ -2978,7 +2978,7 @@ class PreTrainedTokenizerBase(SpecialTokensMixin, PushToHubMixin):
                 if key not in batch_outputs:
                     batch_outputs[key] = []
                 batch_outputs[key].append(value)
-            logger.info(f"outputs, {[(k, v) for k, v in outputs.items()]}")
+            logger.info(f"outputs, {[(k, len(v)) for k, v in outputs.items()]}")
             
         return BatchEncoding(batch_outputs, tensor_type=return_tensors)
 
