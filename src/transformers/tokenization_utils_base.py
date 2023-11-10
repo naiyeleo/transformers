@@ -3338,11 +3338,6 @@ class PreTrainedTokenizerBase(SpecialTokensMixin, PushToHubMixin):
                     encoded_inputs["token_type_ids"] = (
                         encoded_inputs["token_type_ids"] + [self.pad_token_type_id] * difference
                     )
-                for key in encoded_inputs:
-                    if key not in ["input_ids", "token_type_ids", "attention_mask", "special_tokens_mask"]:
-                        encoded_inputs[key] = (
-                            encoded_inputs[key] + [0] * difference
-                        )
                 if "special_tokens_mask" in encoded_inputs:
                     encoded_inputs["special_tokens_mask"] = encoded_inputs["special_tokens_mask"] + [1] * difference
                 encoded_inputs[self.model_input_names[0]] = required_input + [self.pad_token_id] * difference
@@ -3353,9 +3348,6 @@ class PreTrainedTokenizerBase(SpecialTokensMixin, PushToHubMixin):
                     encoded_inputs["token_type_ids"] = [self.pad_token_type_id] * difference + encoded_inputs[
                         "token_type_ids"
                     ]
-                for key in encoded_inputs:
-                    if key not in ["input_ids", "token_type_ids", "attention_mask", "special_tokens_mask"]:
-                        encoded_inputs[key] = [0] * difference + encoded_inputs[key]
                 if "special_tokens_mask" in encoded_inputs:
                     encoded_inputs["special_tokens_mask"] = [1] * difference + encoded_inputs["special_tokens_mask"]
                 encoded_inputs[self.model_input_names[0]] = [self.pad_token_id] * difference + required_input
